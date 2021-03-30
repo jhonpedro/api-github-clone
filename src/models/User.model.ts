@@ -24,7 +24,7 @@ export interface UserI {
   tableName: 'users',
   timestamps: true,
 })
-export default class User extends Model implements UserI {
+class User extends Model implements UserI {
   @AutoIncrement
   @PrimaryKey
   @Column
@@ -61,3 +61,5 @@ export default class User extends Model implements UserI {
   @Column
   bio!: string
 }
+
+export default User
