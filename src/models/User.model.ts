@@ -2,6 +2,7 @@ import {
   AllowNull,
   AutoIncrement,
   Column,
+  Default,
   Model,
   NotEmpty,
   PrimaryKey,
@@ -29,24 +30,24 @@ export default class User extends Model implements UserI {
   @Column
   id: number
 
-  @AllowNull(false)
-  @NotEmpty
+  @AllowNull(true)
   @Column
+  @Default('')
   name!: string
 
-  @AllowNull(false)
-  @NotEmpty
+  @AllowNull(true)
   @Column
+  @Default('')
   email!: string
 
-  @AllowNull(false)
-  @NotEmpty
+  @AllowNull(true)
   @Column
+  @Default('')
   localization!: string
 
-  @AllowNull(false)
-  @NotEmpty
+  @AllowNull(true)
   @Column
+  @Default('')
   avatar!: string
 
   @AllowNull(false)
@@ -55,8 +56,8 @@ export default class User extends Model implements UserI {
   @Column
   username!: string
 
-  @AllowNull(false)
-  @NotEmpty
+  @AllowNull(true)
   @Column
+  @Default('')
   bio!: string
 }
