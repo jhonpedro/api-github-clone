@@ -1,4 +1,6 @@
 import express from 'express'
+import UserRoutes from './routes/UserRoutes'
+import ErrorHandlerMiddleware from './utils/errors/ErrorHandlerMiddleware'
 
 class App {
   server = express()
@@ -10,12 +12,11 @@ class App {
 
   middlewares() {
     this.server.use(express.json())
+    this.server.use(ErrorHandlerMiddleware)
   }
 
   routes() {
-    this.server.get('/', (req, res) => {
-      res.json({ message: 'Ok' })
-    })
+    this.server.use('/users', UserRoutes)
   }
 }
 
