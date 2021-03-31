@@ -1,8 +1,10 @@
 import {
+  AutoIncrement,
   Column,
   ForeignKey,
   Model,
   NotEmpty,
+  PrimaryKey,
   Table,
 } from 'sequelize-typescript'
 import User from './User.model'
@@ -17,6 +19,11 @@ export interface TokenI {
   updatedAt: false,
 })
 class Token extends Model implements TokenI {
+  @AutoIncrement
+  @PrimaryKey
+  @Column
+  id: number
+
   @ForeignKey(() => User)
   @NotEmpty
   @Column
