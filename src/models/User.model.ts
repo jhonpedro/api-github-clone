@@ -9,6 +9,7 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript'
+import { TEXT } from 'sequelize'
 
 export interface UserI {
   id: number
@@ -58,7 +59,7 @@ class User extends Model implements UserI {
 
   @AllowNull(true)
   @Default('')
-  @Column
+  @Column(TEXT)
   bio!: string
 }
 
