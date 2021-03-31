@@ -27,7 +27,6 @@ class Token extends Model implements TokenI {
   @ForeignKey(() => User)
   @NotEmpty
   @Column
-  @Column
   userid!: number
 }
 
