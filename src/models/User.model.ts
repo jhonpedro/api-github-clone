@@ -34,22 +34,22 @@ class User extends Model implements UserI {
   @AllowNull(true)
   @Default('')
   @Column
-  name!: string
+  name: string
 
   @AllowNull(true)
   @Default('')
   @Column
-  email!: string
+  email: string
 
   @AllowNull(true)
   @Default('')
   @Column
-  localization!: string
+  localization: string
 
   @AllowNull(true)
   @Default('')
   @Column
-  avatar!: string
+  avatar: string
 
   @AllowNull(false)
   @NotEmpty
@@ -60,7 +60,7 @@ class User extends Model implements UserI {
   @AllowNull(true)
   @Default('')
   @Column(TEXT)
-  bio!: string
+  bio: string
 }
 
 export default User
