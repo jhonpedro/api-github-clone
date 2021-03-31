@@ -14,7 +14,7 @@ export default {
 
     const user = await User.findOne({ where: { username: userName } })
 
-    return res.json({ ...user })
+    return res.json(user)
   },
 
   async create(req: Request, res: Response) {
@@ -55,7 +55,7 @@ export default {
     }
 
     try {
-      // Creating token every time, we can search before creating new
+      // Creating token every time, we can search before creating a new one
       const token = JWT.sign({ id: user.id }, process.env.JWT_SECRET, {
         expiresIn: '1000 years',
       })
@@ -65,6 +65,33 @@ export default {
       return res.json({ token })
     } catch (error) {
       throw new AppError('error in token creation', 500)
+    }
+  },
+
+  async update(req: Request, res: Response) {
+    const { name, email, localization, username, bio } = req.body
+
+    const userUpdated = {
+      name,
+      email,
+      localization,
+      username,
+      bio,
+      avatar: `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/images/${req.file.filename}`,
+    }
+
+    try {
+      const updateUserOperation = await User.update(
+        { ...userUpdated },
+        { where: { id: req.user.id }, returning: ['*'] }
+      )
+
+      return res.json({
+        success: updateUserOperation[0],
+        user: updateUserOperation[1],
+      })
+    } catch (error) {
+      throw new AppError('an error ocurred in update', 500)
     }
   },
 }
