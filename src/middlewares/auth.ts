@@ -24,8 +24,8 @@ export default function auth(req: Request, res: Response, next: NextFunction) {
       id,
     }
 
-    next()
+    return next()
   } catch (error) {
-    throw new AppError('there is a problem with your token', 404)
+    throw new AppError('invalid token', 401)
   }
 }
