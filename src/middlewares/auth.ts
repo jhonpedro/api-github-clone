@@ -4,6 +4,7 @@ import AppError from '../utils/errors/AppError'
 
 interface TokenPayload {
   id: number
+  username: string
 }
 
 export default function auth(req: Request, res: Response, next: NextFunction) {
@@ -18,14 +19,15 @@ export default function auth(req: Request, res: Response, next: NextFunction) {
 
     const tokenData = verify(token, process.env.JWT_SECRET)
 
-    const { id } = tokenData as TokenPayload
+    const { id, username } = tokenData as TokenPayload
 
     req.user = {
       id,
+      username,
     }
 
     return next()
   } catch (error) {
-    throw new AppError('invalid token', 401)
+    throw new AppError('invalid token', 403)
   }
 }
