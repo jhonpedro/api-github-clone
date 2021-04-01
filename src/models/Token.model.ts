@@ -13,7 +13,7 @@ export interface TokenI {
 
 @Table({
   tableName: 'tokens',
-  createdAt: true,
+  timestamps: true,
   updatedAt: false,
 })
 class Token extends Model implements TokenI {
