@@ -1,18 +1,15 @@
 import {
   AllowNull,
-  AutoIncrement,
   Column,
   Default,
   Model,
   NotEmpty,
-  PrimaryKey,
   Table,
   Unique,
 } from 'sequelize-typescript'
 import { TEXT } from 'sequelize'
 
 export interface UserI {
-  id: number
   name: string
   email: string
   localization: string
@@ -26,11 +23,6 @@ export interface UserI {
   timestamps: true,
 })
 class User extends Model implements UserI {
-  @AutoIncrement
-  @PrimaryKey
-  @Column
-  id: number
-
   @AllowNull(true)
   @Default('')
   @Column
