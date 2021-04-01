@@ -1,14 +1,17 @@
+import 'reflect-metadata'
+import 'express-async-errors'
 import express from 'express'
 import { resolve } from 'path'
 import UserRoutes from './routes/UserRoutes'
+import FollowerRoutes from './routes/FollowerRoutes'
 import ErrorHandlerMiddleware from './utils/errors/ErrorHandlerMiddleware'
 
 class App {
   server = express()
 
   constructor() {
-    this.middlewares()
     this.routes()
+    this.middlewares()
   }
 
   middlewares() {
@@ -22,6 +25,7 @@ class App {
 
   routes() {
     this.server.use('/users', UserRoutes)
+    this.server.use('/followers', FollowerRoutes)
   }
 }
 
