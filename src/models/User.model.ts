@@ -2,6 +2,7 @@ import {
   AllowNull,
   Column,
   Default,
+  Min,
   Model,
   NotEmpty,
   Table,
@@ -46,6 +47,7 @@ class User extends Model implements UserI {
   @AllowNull(false)
   @NotEmpty
   @Unique
+  @Min(3)
   @Column
   username!: string
 
