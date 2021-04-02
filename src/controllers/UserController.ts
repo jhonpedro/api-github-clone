@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import JWT from 'jsonwebtoken'
 import Follower from '../models/Follower.model'
+import Repository from '../models/Repository.model'
 import Token from '../models/Token.model'
 import User, { UserI } from '../models/User.model'
 import AppError from '../utils/errors/AppError'
@@ -32,10 +33,15 @@ export default {
       where: { userid: user.id },
     })
 
+    const repositoriesCount = await Repository.count({
+      where: { userid: user.id },
+    })
+
     const userWithFollowersAndFollowing: UserWithFollowersAndFollowing = {
       ...user.get(),
       followersCount,
       followingCount,
+      repositoriesCount,
     }
 
     return res.json(userWithFollowersAndFollowing)
