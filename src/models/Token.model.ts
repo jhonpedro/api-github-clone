@@ -1,11 +1,4 @@
-import {
-  Column,
-  ForeignKey,
-  Model,
-  NotEmpty,
-  Table,
-} from 'sequelize-typescript'
-import User from './User.model'
+import { Column, Model, NotEmpty, Table } from 'sequelize-typescript'
 
 export interface TokenI {
   userid: number
@@ -17,9 +10,12 @@ export interface TokenI {
   updatedAt: false,
 })
 class Token extends Model implements TokenI {
-  @ForeignKey(() => User)
   @NotEmpty
-  @Column
+  @Column({
+    references: { model: 'users', key: 'id' },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   userid!: number
 }
 
