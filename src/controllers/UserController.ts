@@ -1,8 +1,14 @@
 import { Request, Response } from 'express'
 import JWT from 'jsonwebtoken'
+import Follower from '../models/Follower.model'
 import Token from '../models/Token.model'
-import User from '../models/User.model'
+import User, { UserI } from '../models/User.model'
 import AppError from '../utils/errors/AppError'
+
+interface UserWithFollowersAndFollowing extends UserI {
+  followersCount: number
+  followingCount: number
+}
 
 export default {
   async show(req: Request, res: Response) {
@@ -14,7 +20,25 @@ export default {
 
     const user = await User.findOne({ where: { username: userName } })
 
-    return res.json(user)
+    if (!user) {
+      throw new AppError(`no user founded with username ${userName}`, 404)
+    }
+
+    const followersCount = await Follower.count({
+      where: { followsuserid: user.id },
+    })
+
+    const followingCount = await Follower.count({
+      where: { userid: user.id },
+    })
+
+    const userWithFollowersAndFollowing: UserWithFollowersAndFollowing = {
+      ...user.get(),
+      followersCount,
+      followingCount,
+    }
+
+    return res.json(userWithFollowersAndFollowing)
   },
 
   async create(req: Request, res: Response) {
@@ -77,7 +101,9 @@ export default {
       localization,
       username,
       bio,
-      avatar: `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/images/${req.file.filename}`,
+      avatar: req.file
+        ? `http://${process.env.HOST_IP}:${process.env.HOST_PORT}/images/${req.file.filename}`
+        : '',
     }
 
     try {
@@ -86,10 +112,7 @@ export default {
         { where: { id: req.user.id }, returning: ['*'] }
       )
 
-      return res.json({
-        success: updateUserOperation[0],
-        user: updateUserOperation[1],
-      })
+      return res.json(updateUserOperation[1][0])
     } catch (error) {
       throw new AppError('an error ocurred in update', 500)
     }
