@@ -12,7 +12,8 @@ export default function ErrorHandlerMiddleware(
     return res.status(err.statusCode).json({ message: err.message })
   }
 
-  return res
-    .status(500)
-    .json({ messsage: 'something went wrong in the server' })
+  return res.status(500).json({
+    messsage: 'something went wrong in the server',
+    error: err.message,
+  })
 }
