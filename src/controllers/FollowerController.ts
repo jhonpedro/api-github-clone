@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import connection from '../database/database'
 import Follower from '../models/Follower.model'
 import User from '../models/User.model'
 import AppError from '../utils/errors/AppError'
@@ -13,8 +14,18 @@ export default {
     }
 
     if (req.user.id === userToFollowExists.id) {
-      // return res.status(401).json({ message: 'you cant follow yourself' })
       throw new AppError('you cant follow yourself', 401)
+    }
+
+    const isUserAlreadyFollowing = await Follower.findOne({
+      where: {
+        userid: req.user.id,
+        followsuserid: userToFollowExists.id,
+      },
+    })
+
+    if (isUserAlreadyFollowing) {
+      throw new AppError('you cant follow the same person twice', 403)
     }
 
     await Follower.create({
@@ -41,5 +52,37 @@ export default {
       return res.sendStatus(200)
     }
     throw new AppError('unable to unfollow', 500)
+  },
+
+  async indexFollowers(req: Request, res: Response) {
+    const { userName } = req.params
+
+    const user = await User.findOne({
+      where: { username: userName },
+      attributes: ['id'],
+    })
+
+    const followers = await connection.query(
+      'SELECT * FROM "users" where "users"."id" IN (SELECT "userid" FROM "followers" where "followsuserid" = :userid)',
+      { replacements: { userid: user.id } }
+    )
+
+    return res.json(followers[0])
+  },
+
+  async indexFollowing(req: Request, res: Response) {
+    const { userName } = req.params
+
+    const user = await User.findOne({
+      where: { username: userName },
+      attributes: ['id'],
+    })
+
+    const followers = await connection.query(
+      'SELECT * FROM "users" WHERE "users"."id" IN (SELECT "followsuserid" FROM "followers" WHERE "userid" = :userid)',
+      { replacements: { userid: user.id } }
+    )
+
+    return res.json(followers[0])
   },
 }
