@@ -19,11 +19,10 @@ export default function auth(req: Request, res: Response, next: NextFunction) {
 
     const tokenData = verify(token, process.env.JWT_SECRET)
 
-    const { id, username } = tokenData as TokenPayload
+    const { id } = tokenData as TokenPayload
 
     req.user = {
       id,
-      username,
     }
 
     return next()
