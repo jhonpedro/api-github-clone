@@ -1,12 +1,4 @@
-import {
-  AllowNull,
-  Column,
-  ForeignKey,
-  Model,
-  NotEmpty,
-  Table,
-} from 'sequelize-typescript'
-import User from './User.model'
+import { AllowNull, Column, Model, NotEmpty, Table } from 'sequelize-typescript'
 
 export interface FollowerI {
   userid: number
@@ -19,16 +11,22 @@ export interface FollowerI {
   updatedAt: false,
 })
 class Follower extends Model implements FollowerI {
-  @ForeignKey(() => User)
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column({
+    references: { model: 'users', key: 'id' },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   userid!: number
 
-  @ForeignKey(() => User)
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column({
+    references: { model: 'users', key: 'id' },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   followsuserid!: number
 }
 
