@@ -62,6 +62,10 @@ export default {
       attributes: ['id'],
     })
 
+    if (!user) {
+      throw new AppError('this user does not exists', 400)
+    }
+
     const followers = await connection.query(
       'SELECT * FROM "users" where "users"."id" IN (SELECT "userid" FROM "followers" where "followsuserid" = :userid)',
       { replacements: { userid: user.id } }
@@ -77,6 +81,10 @@ export default {
       where: { username: userName },
       attributes: ['id'],
     })
+
+    if (!user) {
+      throw new AppError('this user does not exists', 400)
+    }
 
     const followers = await connection.query(
       'SELECT * FROM "users" WHERE "users"."id" IN (SELECT "followsuserid" FROM "followers" WHERE "userid" = :userid)',

@@ -87,6 +87,10 @@ export default {
       { where: { id }, returning: ['*'] }
     )
 
+    if (!updatedRepository[1][0]) {
+      throw new AppError('repository do not exists', 400)
+    }
+
     updatedRepository[1][0].slug = slugify(
       `${user.name.toLowerCase()} ${updatedRepository[1][0].slug}`
     )
@@ -109,16 +113,14 @@ export default {
       attributes: ['name'],
     })
 
+    if (!user) {
+      throw new AppError('this user dont exists', 400)
+    }
+
     const repositories = await connection.query(
       `SELECT *, (SELECT COUNT("repositoriesstars"."id") as stars FROM repositoriesstars WHERE "repositoriesstars"."repositoryid" = "repositories"."id") FROM "repositories" WHERE "repositories"."ownerusername" = :username`,
       { replacements: { username: userName } }
     )
-
-    if (!repositories) {
-      if (!user) {
-        throw new AppError('this user dont have this repository', 400)
-      }
-    }
 
     for (let i = 0; i < repositories[0].length; i += 1) {
       // @ts-ignore
