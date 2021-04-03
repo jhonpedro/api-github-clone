@@ -1,10 +1,9 @@
+/* eslint-disable */
 import App from './App'
 
 import Connection from './database/database'
 
 App.listen('8080', async () => {
-  // eslint-disable-next-line
-
   // Try to connect to database five times
   let succesToConnect = false
   for (let i = 0; i < 5; i += 1) {
@@ -19,7 +18,6 @@ App.listen('8080', async () => {
       await new Promise((resolve) => {
         setTimeout(resolve, 3000)
       })
-      continue
     }
   }
   if (!succesToConnect) {
