@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: test_luby
+    ports:
+      - '5432:5432'
+    container_name: test_luby_db
+
+  api:
+    build:
+      context: .
+      dockerfile: .
+      network: 'host'
+    depends_on:
+      - db
+    ports:
+      - '8080:8080'
+    container_name: test_luby_api
+    links:
+      - db
+    environment:
+      - DATABASE_HOST=db
