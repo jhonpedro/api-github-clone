@@ -11,7 +11,7 @@ App.listen('8080', async () => {
     try {
       console.log(`Try ${i + 1} to connect`)
       await Connection.authenticate()
-      Connection.sync({ force: false })
+      Connection.sync({ force: true })
       console.log('connected to db')
       succesToConnect = true
       break
