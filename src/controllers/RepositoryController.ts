@@ -49,17 +49,23 @@ export default {
       throw new AppError('missing params for repository retriving', 400)
     }
 
-    const trueRepositorySlug = repositorySlug.slice(
-      repositorySlug.indexOf('-') + 1
+    const user = await User.findOne({
+      where: { username: userName },
+      attributes: ['name'],
+    })
+
+    const trueRepositorySlug = repositorySlug.replace(
+      `${slugify(user.name.toLocaleLowerCase())}-`,
+      ''
     )
 
     const repository = await Repository.findOne({
       where: { slug: trueRepositorySlug, ownerusername: userName },
     })
 
-    const user = await User.findByPk(repository.userid, {
-      attributes: ['name'],
-    })
+    if (!repository) {
+      throw new AppError('no repository found', 404)
+    }
 
     const repositoryStarsCount = await RepositoryStars.count({
       where: { repositoryid: repository.id },

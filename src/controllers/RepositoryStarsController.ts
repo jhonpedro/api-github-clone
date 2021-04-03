@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import slugify from 'slugify'
 import Repository from '../models/Repository.model'
 import RepositoryStars from '../models/RepositoryStars.model'
 import User from '../models/User.model'
@@ -10,11 +11,12 @@ export default {
     const repositorySlug = req.params.repositorySlug as string
 
     const userWhoStarred = await User.findByPk(req.user.id, {
-      attributes: ['username'],
+      attributes: ['username', 'name'],
     })
 
-    const trueRepositorySlug = repositorySlug.slice(
-      repositorySlug.indexOf('-') + 1
+    const trueRepositorySlug = repositorySlug.replace(
+      `${slugify(userWhoStarred.name.toLocaleLowerCase())}-`,
+      ''
     )
 
     const repository = await Repository.findOne({
