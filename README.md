@@ -16,7 +16,7 @@ To run this way you'll need to have Docker compose. So, just run in your termina
 $ docker-compose up -d
 ```
 
-### Running withou docker
+### Running without docker
 
 To run without docker you'll need the latest stable version of Nodejs (current 14.16) and an instace of PostgresSQL
 
