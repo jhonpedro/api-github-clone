@@ -6,6 +6,8 @@ Clone the project
 $ git clone https://github.com/jhonpedro/api-github-clone && cd api-github-clone
 ```
 
+In both ways the API will be running on http://locahost:8080
+
 ### Run with docker compose
 
 To run this way you'll need to have Docker compose. So, just run in your terminal if you're inside of API folder
@@ -62,3 +64,5 @@ $ yarn dev
 this comand restars the server each time you save and file .ts
 
 ps: If you dont like that sequelize drop all databases in each reload, you can remove in `server.ts` the `Connection.sync({ force: true })` and replace with `Connection.sync({ force: false })`
+
+You can import `api-endpoints-insomnia-v4.json` in your Insomnia to have all endpoints ready, if you want an import file like this one for Postman send me an e-mail, you can see it in [here](https://www.jhonpedro.tech/) in "Contato"
