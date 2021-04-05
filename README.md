@@ -10,7 +10,11 @@ In both ways the API will be running on http://locahost:8080
 
 ### Run with docker compose
 
-To run this way you'll need to have Docker compose. So, just run in your terminal if you're inside of API folder
+To run this way you'll need to have Docker compose.
+
+Rename `.env.example` to `.env`
+
+Run in your terminal if you're inside of API folder
 
 ```bash
 $ docker-compose up -d
