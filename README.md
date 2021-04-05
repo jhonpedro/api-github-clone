@@ -16,7 +16,19 @@ $ docker-compose up -d
 
 ### Running withou docker
 
-To run withou docker you'll need the latest stable version of Nodejs (current 14.16) and an instace of PostgresSQL
+To run without docker you'll need the latest stable version of Nodejs (current 14.16) and an instace of PostgresSQL
+
+Firts, install the dependencies
+
+```bash
+$ yarn
+```
+
+or
+
+```bash
+$ npm install
+```
 
 Fill the `.env.example` with your own credentials and rename it to `.env`
 And then you'll need to change with the same information the `API/src/database/config.json` that is responsable for the connection for the next command.
