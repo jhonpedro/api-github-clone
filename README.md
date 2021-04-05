@@ -55,7 +55,9 @@ or if you prefer npm
 $ npm run start
 ```
 
-To run the development server you'll run the script:
+Now the api is running. But if you preffer you can run it in another way.
+
+To run the development server with hot reload you'll run the script:
 
 ```bash
 $ yarn dev
