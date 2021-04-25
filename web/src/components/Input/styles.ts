@@ -29,6 +29,8 @@ export const InputPlaceholder = styled.span<InputPlaceholderProps>`
 `
 
 export const InputElement = styled.input`
+  width: 100%;
+
   font-size: 1.6rem;
   padding: 1rem 1.5rem;
   border-radius: 1rem;
