@@ -30,7 +30,7 @@ export default createGlobalStyle`
     color: var(--color-white);
   }
 
-  body, input {
+  body, input, button {
     font-family: Poppins, sans-serif;
   }
 `
