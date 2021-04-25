@@ -2,6 +2,7 @@ import 'reflect-metadata'
 import 'express-async-errors'
 import express from 'express'
 import { resolve } from 'path'
+import cors from 'cors'
 import UserRoutes from './routes/UserRoutes'
 import FollowerRoutes from './routes/FollowerRoutes'
 import ErrorHandlerMiddleware from './utils/errors/ErrorHandlerMiddleware'
@@ -18,6 +19,7 @@ class App {
   }
 
   middlewares() {
+    this.server.use(cors())
     this.server.use(express.json())
     this.server.use(
       '/images',
