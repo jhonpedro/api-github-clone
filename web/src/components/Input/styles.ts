@@ -10,7 +10,6 @@ export const InputContainer = styled.div`
 
 export const InputPlaceholder = styled.span<InputPlaceholderProps>`
   position: absolute;
-  font-size: 1;
   top: 1rem;
   left: 1.5rem;
   color: var(--color-dark);
@@ -20,7 +19,7 @@ export const InputPlaceholder = styled.span<InputPlaceholderProps>`
     if (props.isUp) {
       return css`
         top: 0;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: var(--color-yellow);
       `
     }
