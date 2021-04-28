@@ -14,15 +14,17 @@ function* fetchAuth(action: SingInI) {
       userName: action.payload.username,
     })
 
-    yield put({
-      type: SING_IN_SUCCESS,
-      payload: { token: response.data.token },
-    })
-
-    yield action.callback({
+    const tokenAndUsername = {
       token: response.data.token,
       username: action.payload.username,
+    }
+
+    yield put({
+      type: SING_IN_SUCCESS,
+      payload: tokenAndUsername,
     })
+
+    yield action.callback(tokenAndUsername)
   } catch (error) {
     yield put({ type: SING_IN_ERROR })
   }
