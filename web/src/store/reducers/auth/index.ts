@@ -2,6 +2,7 @@ import { SING_IN_SUCCESS, SING_IN_ERROR } from '../../actionsTypes'
 
 const initialState = {
   token: '',
+  username: '',
   error: [''],
 }
 
@@ -13,7 +14,11 @@ export default function AuthReducer(
 ): AuthReducerType {
   switch (action.type) {
     case SING_IN_SUCCESS: {
-      const newState = { ...state, token: action.payload.token }
+      const newState = {
+        ...state,
+        token: action.payload.token,
+        username: action.payload.username,
+      }
       return newState
     }
     case SING_IN_ERROR: {
