@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import UserProfile from '../components/UserProfile'
+import UserProfile from '../pages/UserProfile'
 import SingIn from '../pages/SingIn'
 
 function Routes() {
