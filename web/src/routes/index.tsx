@@ -6,7 +6,7 @@ import SingIn from '../pages/SingIn'
 function Routes() {
   return (
     <Switch>
-      <Route path="/">
+      <Route path="/" exact>
         <UserProfile />
       </Route>
       <Route path="/sing-in">
