@@ -2,6 +2,13 @@ import { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from '../../services/axios'
+import {
+  UserProfileContainer,
+  UserProfileData,
+  UserProfileHeader,
+  UserProfileCounts,
+  UserProfileBiography,
+} from './styles'
 
 interface User {
   id: number
@@ -45,19 +52,38 @@ const UserProfile: React.FC = () => {
   }, [])
 
   return (
-    <div>
-      <span>Name: {user.name}</span>
-      <span>Email: {user.email}</span>
-      <span>Localização {user.localization}</span>
-      <span>
-        Avatar <img src={user.avatar} alt={`Foto de ${user.name}`} />
-      </span>
-      <span>Username: {user.username}</span>
-      <span>Biografia: {user.bio}</span>
-      <span>Followers: {user.followersCount}</span>
-      <span>Following: {user.followingCount}</span>
-      <span>Quantidade de repositórios: {user.repositoriesCount}</span>
-    </div>
+    <UserProfileContainer>
+      <UserProfileHeader>
+        <span className="username">#{user.username}</span>
+      </UserProfileHeader>
+
+      <UserProfileData>
+        <img src={user.avatar} alt={`Foto de ${user.name}`} />
+        <strong>{user.name}</strong>
+        <span className="email">{user.email}</span>
+        <span className="localization">{user.localization}</span>
+      </UserProfileData>
+
+      <UserProfileCounts>
+        <div>
+          <strong>{user.followersCount}</strong>
+          <span>Followers</span>
+        </div>
+        <div>
+          <strong>{user.followingCount}</strong>
+          <span>Following</span>
+        </div>
+        <div>
+          <strong>{user.repositoriesCount}</strong>
+          <span>Repos</span>
+        </div>
+      </UserProfileCounts>
+
+      <UserProfileBiography>
+        <strong>Bio</strong>
+        <p>{user.bio}</p>
+      </UserProfileBiography>
+    </UserProfileContainer>
   )
 }
 
