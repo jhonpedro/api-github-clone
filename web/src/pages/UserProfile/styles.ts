@@ -5,6 +5,25 @@ export const UserProfileContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .circle-left {
+    position: relative;
+  }
+
+  .circle-left:after {
+    content: '';
+    height: 3rem;
+    width: 1.5rem;
+    position: absolute;
+    display: flex;
+    background-color: var(--color-yellow);
+
+    top: 0;
+    left: -2.7rem;
+
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
 `
 
 export const UserProfileHeader = styled.div`
@@ -53,6 +72,7 @@ export const UserProfileData = styled.div`
   .email,
   .localization {
     font-size: 1.4rem;
+    font-weight: 300;
   }
 `
 
@@ -88,6 +108,7 @@ export const UserProfileBiography = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0 2rem;
+  font-weight: 300;
 
   strong {
     font-size: 2.5rem;

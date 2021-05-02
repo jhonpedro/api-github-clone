@@ -59,7 +59,7 @@ const UserProfile: React.FC = () => {
 
       <UserProfileData>
         <img src={user.avatar} alt={`Foto de ${user.name}`} />
-        <strong>{user.name}</strong>
+        <strong className="circle-left">{user.name.toUpperCase()}</strong>
         <span className="email">{user.email}</span>
         <span className="localization">{user.localization}</span>
       </UserProfileData>
@@ -67,11 +67,11 @@ const UserProfile: React.FC = () => {
       <UserProfileCounts>
         <div>
           <strong>{user.followersCount}</strong>
-          <span>Followers</span>
+          <span>Seguidores</span>
         </div>
         <div>
           <strong>{user.followingCount}</strong>
-          <span>Following</span>
+          <span>Seguindo</span>
         </div>
         <div>
           <strong>{user.repositoriesCount}</strong>
@@ -80,7 +80,7 @@ const UserProfile: React.FC = () => {
       </UserProfileCounts>
 
       <UserProfileBiography>
-        <strong>Bio</strong>
+        <strong className="circle-left">BIO</strong>
         <p>{user.bio}</p>
       </UserProfileBiography>
     </UserProfileContainer>
