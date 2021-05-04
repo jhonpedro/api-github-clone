@@ -1,12 +1,13 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import UserProfile from '../pages/UserProfile'
 import SingIn from '../pages/SingIn'
+import Route from './Route'
 
 function Routes() {
   return (
     <Switch>
-      <Route path="/" exact>
+      <Route path="/" exact isPrivate>
         <UserProfile />
       </Route>
       <Route path="/sing-in">
