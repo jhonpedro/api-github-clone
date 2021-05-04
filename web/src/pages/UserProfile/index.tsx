@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
+import { FaUserCircle } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import axios from '../../services/axios'
 import {
@@ -58,8 +59,15 @@ const UserProfile: React.FC = () => {
       </UserProfileHeader>
 
       <UserProfileData>
-        <img src={user.avatar} alt={`Foto de ${user.name}`} />
-        <strong className="circle-left">{user.name.toUpperCase()}</strong>
+        {user.avatar ? (
+          <img src={user.avatar} alt={`Foto de ${user.name}`} />
+        ) : (
+          <FaUserCircle size="13rem" color="var(--color-grey)" />
+        )}
+
+        <strong className="circle-left">
+          {user.name ? user.name.toUpperCase() : ''}
+        </strong>
         <span className="email">{user.email}</span>
         <span className="localization">{user.localization}</span>
       </UserProfileData>
