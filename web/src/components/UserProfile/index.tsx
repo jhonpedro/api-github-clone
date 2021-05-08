@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
-import { useParams } from 'react-router-dom'
 import axios from '../../services/axios'
 import {
   UserProfileContainer,
@@ -26,13 +25,12 @@ interface User {
   repositoriesCount: number
 }
 
-interface UseParamsProps {
-  username: string | undefined
+interface UserProfileProps {
+  username: string
 }
 
-const UserProfile: React.FC = () => {
+const UserProfile: React.FC<UserProfileProps> = ({ username }) => {
   const [user, setUser] = useState<User>({} as User)
-  const { username } = useParams<UseParamsProps>()
 
   useEffect(() => {
     if (username) {
