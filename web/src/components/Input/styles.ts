@@ -5,6 +5,7 @@ interface InputPlaceholderProps {
 }
 
 export const InputContainer = styled.div`
+  width: 100%;
   position: relative;
 `
 
@@ -18,8 +19,7 @@ export const InputPlaceholder = styled.span<InputPlaceholderProps>`
   ${(props) => {
     if (props.isUp) {
       return css`
-        top: 0;
-        font-size: 1.1rem;
+        top: -1.7rem;
         color: var(--color-yellow);
       `
     }
