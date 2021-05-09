@@ -8,13 +8,18 @@ export const SingInContainer = styled.div`
   justify-content: center;
   height: 100%;
 
+  padding: 0 10%;
+
+  form {
+    width: 100%;
+  }
+
   > svg {
-    width: 40%;
+    width: 50%;
     height: auto;
   }
 
   ${InputContainer} {
-    width: 80%;
     margin-bottom: 1rem;
   }
 `
