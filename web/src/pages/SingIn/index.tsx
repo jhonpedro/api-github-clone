@@ -13,7 +13,9 @@ const LoginPage = () => {
   const dispatch = useDispatch()
   const { push } = useHistory()
 
-  async function handleSingIn() {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
     dispatch(
       SingIn(
         username,
@@ -40,16 +42,18 @@ const LoginPage = () => {
   return (
     <SingInContainer>
       <DiGithubBadge color="var(--color-yellow)" />
-      <Input
-        errorMessage="Usuário é obrigatório"
-        showError={false}
-        value={username}
-        placeholder="Username"
-        onChange={handleChangeUsername}
-      />
-      <Button size="80%" onClick={handleSingIn}>
-        ENTRAR <FaArrowRight color="var(--color-dark)" />{' '}
-      </Button>
+      <form onSubmit={handleSubmit}>
+        <Input
+          errorMessage="Usuário é obrigatório"
+          showError={false}
+          value={username}
+          placeholder="Username"
+          onChange={handleChangeUsername}
+        />
+        <Button size="100%">
+          ENTRAR <FaArrowRight color="var(--color-dark)" />{' '}
+        </Button>
+      </form>
     </SingInContainer>
   )
 }
