@@ -29,9 +29,10 @@ export default createGlobalStyle`
     font-size: 1.6rem;
     background-color: var(--color-dark);
     color: var(--color-white);
+    font-family: Helvetica, sans-serif;
   }
 
   body, input, button {
-    font-family: Roboto, sans-serif;
+    font-family: Helvetica, sans-serif;
   }
 `
