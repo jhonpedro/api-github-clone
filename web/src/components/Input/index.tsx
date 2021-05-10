@@ -49,7 +49,7 @@ const Input: React.FC<InputProps> = ({
       </InputPlaceholder>
       <InputElement
         value={value}
-        type={!type ? 'string' : type}
+        type={!type ? 'text' : type}
         onBlur={handleBlur}
         onFocus={handleFocus}
         ref={inputRef}
