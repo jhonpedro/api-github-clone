@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FaUserCircle } from 'react-icons/fa'
-import axios from '../../services/axios'
+import { UserI } from '../../pages/User'
+
 import {
   UserProfileContainer,
   UserProfileData,
@@ -10,87 +10,54 @@ import {
   UserProfileBiography,
 } from './styles'
 
-interface User {
-  id: number
-  name: string
-  email: string
-  localization: string
-  avatar: string
-  username: string
-  bio: string
-  createdAt: Date
-  updatedAt: Date
-  followersCount: number
-  followingCount: number
-  repositoriesCount: number
-}
+const UserProfile: React.FC<UserI> = ({
+  name,
+  email,
+  localization,
+  avatar,
+  username,
+  bio,
+  followersCount,
+  followingCount,
+  repositoriesCount,
+}) => (
+  <UserProfileContainer>
+    <UserProfileHeader>
+      <span className="username">#{username}</span>
+    </UserProfileHeader>
 
-interface UserProfileProps {
-  username: string
-}
+    <UserProfileData>
+      {avatar ? (
+        <img src={avatar} alt={`Foto de ${name}`} />
+      ) : (
+        <FaUserCircle size="13rem" color="var(--color-grey)" />
+      )}
 
-const UserProfile: React.FC<UserProfileProps> = ({ username }) => {
-  const [user, setUser] = useState<User>({} as User)
+      <strong className="circle-left">{name ? name.toUpperCase() : ''}</strong>
+      <span className="email">{email}</span>
+      <span className="localization">{localization}</span>
+    </UserProfileData>
 
-  useEffect(() => {
-    if (username) {
-      axios
-        .get<any, AxiosResponse<User>>(`users/${username}`)
-        .then((response) => {
-          setUser(response.data)
-        })
-    } else {
-      axios
-        .get<any, AxiosResponse<User>>(
-          `users/${localStorage.getItem('username')}`
-        )
-        .then((response) => {
-          setUser(response.data)
-        })
-    }
-  }, [])
+    <UserProfileCounts>
+      <div>
+        <strong>{followersCount}</strong>
+        <span>Seguidores</span>
+      </div>
+      <div>
+        <strong>{followingCount}</strong>
+        <span>Seguindo</span>
+      </div>
+      <div>
+        <strong>{repositoriesCount}</strong>
+        <span>Repos</span>
+      </div>
+    </UserProfileCounts>
 
-  return (
-    <UserProfileContainer>
-      <UserProfileHeader>
-        <span className="username">#{user.username}</span>
-      </UserProfileHeader>
-
-      <UserProfileData>
-        {user.avatar ? (
-          <img src={user.avatar} alt={`Foto de ${user.name}`} />
-        ) : (
-          <FaUserCircle size="13rem" color="var(--color-grey)" />
-        )}
-
-        <strong className="circle-left">
-          {user.name ? user.name.toUpperCase() : ''}
-        </strong>
-        <span className="email">{user.email}</span>
-        <span className="localization">{user.localization}</span>
-      </UserProfileData>
-
-      <UserProfileCounts>
-        <div>
-          <strong>{user.followersCount}</strong>
-          <span>Seguidores</span>
-        </div>
-        <div>
-          <strong>{user.followingCount}</strong>
-          <span>Seguindo</span>
-        </div>
-        <div>
-          <strong>{user.repositoriesCount}</strong>
-          <span>Repos</span>
-        </div>
-      </UserProfileCounts>
-
-      <UserProfileBiography>
-        <strong className="circle-left">BIO</strong>
-        <p>{user.bio}</p>
-      </UserProfileBiography>
-    </UserProfileContainer>
-  )
-}
+    <UserProfileBiography>
+      <strong className="circle-left">BIO</strong>
+      <p>{bio}</p>
+    </UserProfileBiography>
+  </UserProfileContainer>
+)
 
 export default UserProfile
