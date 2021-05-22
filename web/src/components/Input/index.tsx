@@ -16,12 +16,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   ...rest
 }) => {
-  const [isUp, setIsUp] = useState(() => {
-    if (value) {
-      return true
-    }
-    return false
-  })
+  const [isUp, setIsUp] = useState(!!value)
   const inputRef = useRef<HTMLInputElement>(null)
 
   function handleBlur(event: FocusEvent<HTMLInputElement>) {
