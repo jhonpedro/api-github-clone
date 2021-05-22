@@ -35,4 +35,8 @@ export default createGlobalStyle`
   body, input, button {
     font-family: Helvetica, sans-serif;
   }
+
+  button {
+    cursor: pointer;
+  }
 `
