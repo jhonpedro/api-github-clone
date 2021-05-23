@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaUserCircle } from 'react-icons/fa'
-import { UserI } from '../../pages/User'
+import { UserI } from '../../hooks/requestUserData'
 
 import {
   UserProfileContainer,
