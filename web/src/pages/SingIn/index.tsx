@@ -29,7 +29,7 @@ const LoginPage = () => {
           localStorage.setItem('token', token)
           localStorage.setItem('username', usernameInState)
 
-          push('/')
+          push(`/${username}`)
         }
       )
     )
