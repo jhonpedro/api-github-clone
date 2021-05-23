@@ -48,7 +48,9 @@ export default {
   },
 
   async create(req: Request, res: Response) {
-    const { userName } = req.body
+    const { userName: usernameRaw } = req.body
+
+    const userName = usernameRaw.toLowerCase()
 
     if (!userName || userName.length < 3) {
       throw new AppError('invalid username on user creation', 403)
