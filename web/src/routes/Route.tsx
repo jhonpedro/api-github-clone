@@ -5,14 +5,14 @@ import {
   Route as RouteFromRouter,
   RouteProps,
 } from 'react-router-dom'
-import { ReduxState } from '../store/store'
+import userSelector from '../store/selectors/user'
 
 interface RoutePropsI extends RouteProps {
   isPrivate?: boolean
 }
 
 const Route: React.FC<RoutePropsI> = ({ children, isPrivate, ...rest }) => {
-  const auth = useSelector((state: ReduxState) => state.auth)
+  const auth = useSelector(userSelector)
 
   if (!auth.token && isPrivate) {
     return <Redirect to="/sing-in" />
