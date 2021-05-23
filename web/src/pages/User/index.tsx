@@ -1,10 +1,11 @@
 import { AxiosResponse } from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { FiEdit, FiLogOut } from 'react-icons/fi'
 import { useSelector } from 'react-redux'
+import { useHistory, useParams } from 'react-router-dom'
 import UserProfile from '../../components/UserProfile'
 import axios from '../../services/axios'
-import { ReduxState } from '../../store/store'
+import userSelector from '../../store/selectors/user'
 
 import { ActionButtons, UserContainer } from './styles'
 
@@ -23,45 +24,43 @@ export interface UserI {
   repositoriesCount: number
 }
 
-function User() {
-  const username = useSelector<ReduxState, string>((state: ReduxState) => {
-    if (state) {
-      return state.auth.username
-    }
+interface UserRouteParams {
+  username: string | undefined
+}
 
-    return ''
-  })
-  const isEditing = useState(false)
+function User() {
+  const { username: usernameParam } = useParams<UserRouteParams>()
+  const username = useMemo(() => usernameParam, [usernameParam])
+  const { username: loggedUserUsername } = useSelector(userSelector)
+  const { push } = useHistory()
+
   const [user, setUser] = useState({} as UserI)
 
   useEffect(() => {
-    if (username) {
-      axios
-        .get<any, AxiosResponse<UserI>>(`users/${username}`)
-        .then((response) => {
-          setUser(response.data)
-        })
-    } else {
-      axios
-        .get<any, AxiosResponse<UserI>>(
-          `users/${localStorage.getItem('username')}`
-        )
-        .then((response) => {
-          setUser(response.data)
-        })
-    }
+    axios
+      .get<any, AxiosResponse<UserI>>(`users/${username}`)
+      .then((response) => {
+        setUser(response.data)
+      })
+      .catch(() => {
+        push('/sing-in')
+      })
   }, [username])
 
-  return !isEditing ? null : (
+  function editMyself() {}
+
+  return (
     <UserContainer>
-      <ActionButtons>
-        <button type="button">
-          Editar <FiEdit />
-        </button>
-        <button type="button">
-          Sair <FiLogOut />
-        </button>
-      </ActionButtons>
+      {loggedUserUsername === usernameParam ? (
+        <ActionButtons>
+          <button type="button" onClick={editMyself}>
+            Editar <FiEdit />
+          </button>
+          <button type="button">
+            Sair <FiLogOut />
+          </button>
+        </ActionButtons>
+      ) : null}
       <UserProfile {...user} />
     </UserContainer>
   )
