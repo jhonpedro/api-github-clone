@@ -7,11 +7,11 @@ import Route from './Route'
 function Routes() {
   return (
     <Switch>
-      <Route path="/" exact isPrivate>
-        <UserProfile />
-      </Route>
       <Route path="/sing-in">
         <SingIn />
+      </Route>
+      <Route path="/:username" isPrivate>
+        <UserProfile />
       </Route>
     </Switch>
   )
