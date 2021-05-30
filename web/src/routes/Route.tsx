@@ -5,14 +5,14 @@ import {
   Route as RouteFromRouter,
   RouteProps,
 } from 'react-router-dom'
-import userSelector from '../store/selectors/user'
+import authSelector from '../store/selectors/auth'
 
 interface RoutePropsI extends RouteProps {
   isPrivate?: boolean
 }
 
 const Route: React.FC<RoutePropsI> = ({ children, isPrivate, ...rest }) => {
-  const auth = useSelector(userSelector)
+  const auth = useSelector(authSelector)
 
   if (!auth.token && isPrivate) {
     return <Redirect to="/sing-in" />
