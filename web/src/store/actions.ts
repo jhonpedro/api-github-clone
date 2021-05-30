@@ -1,4 +1,4 @@
-import { SING_IN_REQUEST } from './actionsTypes'
+import { SING_IN_REQUEST, SET_USER_AND_TOKEN } from './actionsTypes'
 
 export function SingIn(username: string, callback: Function) {
   return {
@@ -8,4 +8,16 @@ export function SingIn(username: string, callback: Function) {
   }
 }
 
-export type SingInI = ReturnType<typeof SingIn>
+interface SetAuth {
+  username: string
+  token: string
+}
+
+export function actionSetAuth(newAuth: SetAuth) {
+  return {
+    type: SET_USER_AND_TOKEN,
+    payload: newAuth,
+  }
+}
+
+export type ActionSingInI = ReturnType<typeof actionSingIn>

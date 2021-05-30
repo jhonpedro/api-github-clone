@@ -1,3 +1,4 @@
 export const SING_IN_REQUEST = 'SING_IN_REQUEST'
 export const SING_IN_SUCCESS = 'SING_IN_SUCCESS'
 export const SING_IN_ERROR = 'SING_IN_ERROR'
+export const SET_USER_AND_TOKEN = 'SET_USER_AND_TOKEN'
