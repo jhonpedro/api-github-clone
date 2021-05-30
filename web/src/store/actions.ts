@@ -1,6 +1,6 @@
 import { SING_IN_REQUEST, SET_USER_AND_TOKEN } from './actionsTypes'
 
-export function SingIn(username: string, callback: Function) {
+export function actionSingIn(username: string, callback: Function) {
   return {
     type: SING_IN_REQUEST,
     payload: { username },

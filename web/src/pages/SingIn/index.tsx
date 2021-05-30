@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
-import { SingIn } from '../../store/actions'
+import { actionSingIn } from '../../store/actions'
 import { SingInContainer } from './styles'
 
 const LoginPage = () => {
@@ -17,7 +17,7 @@ const LoginPage = () => {
     event.preventDefault()
 
     dispatch(
-      SingIn(
+      actionSingIn(
         username,
         ({
           token,
