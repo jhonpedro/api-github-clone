@@ -1,16 +1,19 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { actionSetAuth } from '../store/actions'
-import authSelector from '../store/selectors/auth'
 
 const useSetAuth = () => {
-  const auth = useSelector(authSelector)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (auth) {
-      dispatch(actionSetAuth({ username: auth.username, token: auth.token }))
+    const username = localStorage.getItem('username')
+    const token = localStorage.getItem('token')
+
+    if (!username || !token) {
+      return
     }
+
+    dispatch(actionSetAuth({ username, token }))
   }, [])
 }
 
