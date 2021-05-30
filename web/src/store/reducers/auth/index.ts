@@ -6,7 +6,7 @@ const initialState = {
   error: [''],
 }
 
-type AuthReducerType = typeof initialState
+export type AuthReducerType = typeof initialState
 
 export default function AuthReducer(
   state = initialState,
