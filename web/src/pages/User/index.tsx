@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import UserProfile from '../../components/UserProfile'
 import useRequestUserData from '../../hooks/requestUserData'
-import userSelector from '../../store/selectors/user'
+import authSelector from '../../store/selectors/auth'
 
 import { ActionButtons, UserContainer } from './styles'
 
@@ -15,8 +15,8 @@ interface UserRouteParams {
 function User() {
   const { username: usernameParam } = useParams<UserRouteParams>()
   const username = useMemo(() => usernameParam, [usernameParam])
-  const { username: loggedUserUsername } = useSelector(userSelector)
   const user = useRequestUserData(username)
+  const { username: loggedUserUsername } = useSelector(authSelector)
 
   function editMyself() {}
 
@@ -32,7 +32,18 @@ function User() {
           </button>
         </ActionButtons>
       ) : null}
-      <UserProfile {...user} />
+      <UserProfile
+        id={user.id}
+        name={user.name}
+        email={user.email}
+        localization={user.localization}
+        avatar={user.avatar}
+        username={user.username}
+        bio={user.bio}
+        followersCount={user.followersCount}
+        followingCount={user.followingCount}
+        repositoriesCount={user.repositoriesCount}
+      />
     </UserContainer>
   )
 }
