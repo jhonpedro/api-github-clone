@@ -11,8 +11,8 @@ export interface UserI {
   avatar: string
   username: string
   bio: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
   followersCount: number
   followingCount: number
   repositoriesCount: number
