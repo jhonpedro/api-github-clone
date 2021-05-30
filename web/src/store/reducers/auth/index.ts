@@ -1,4 +1,8 @@
-import { SING_IN_SUCCESS, SING_IN_ERROR } from '../../actionsTypes'
+import {
+  SING_IN_SUCCESS,
+  SING_IN_ERROR,
+  SET_USER_AND_TOKEN,
+} from '../../actionsTypes'
 
 const initialState = {
   token: '',
@@ -23,6 +27,15 @@ export default function AuthReducer(
     }
     case SING_IN_ERROR: {
       const newState = { ...state, error: ['an error ocurred'] }
+
+      return newState
+    }
+    case SET_USER_AND_TOKEN: {
+      const newState = {
+        ...state,
+        username: action.username,
+        token: action.token,
+      }
 
       return newState
     }
