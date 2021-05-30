@@ -1,14 +1,14 @@
 import { AxiosResponse } from 'axios'
 import { put, call, takeLatest } from 'redux-saga/effects'
 import axios from '../../../services/axios'
-import { SingInI } from '../../actions'
+import { ActionSingInI } from '../../actions'
 import {
   SING_IN_ERROR,
   SING_IN_SUCCESS,
   SING_IN_REQUEST,
 } from '../../actionsTypes'
 
-function* fetchAuth(action: SingInI) {
+function* fetchAuth(action: ActionSingInI) {
   try {
     const response: AxiosResponse = yield call(axios.post, '/users/', {
       userName: action.payload.username,
