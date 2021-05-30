@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch } from 'react-router-dom'
+import { Redirect, Switch } from 'react-router-dom'
 import User from '../pages/User'
 import SingIn from '../pages/SingIn'
 import Route from './Route'
@@ -12,6 +12,9 @@ function Routes() {
       </Route>
       <Route path="/:username">
         <User />
+      </Route>
+      <Route path="*">
+        <Redirect to="/sing-in" />
       </Route>
     </Switch>
   )
