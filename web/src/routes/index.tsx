@@ -1,6 +1,6 @@
 import React from 'react'
 import { Switch } from 'react-router-dom'
-import UserProfile from '../pages/User'
+import User from '../pages/User'
 import SingIn from '../pages/SingIn'
 import Route from './Route'
 
@@ -10,8 +10,8 @@ function Routes() {
       <Route path="/sing-in">
         <SingIn />
       </Route>
-      <Route path="/:username" isPrivate>
-        <UserProfile />
+      <Route path="/:username">
+        <User />
       </Route>
     </Switch>
   )
