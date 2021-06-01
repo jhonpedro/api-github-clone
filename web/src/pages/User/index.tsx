@@ -19,7 +19,7 @@ function User() {
   const user = useRequestUserData(username)
   const { username: loggedUserUsername } = useSelector(authSelector)
 
-  function editMyself() {
+  function handleEditMyself() {
     push('/edit/profile')
   }
 
@@ -27,7 +27,7 @@ function User() {
     <UserContainer>
       {loggedUserUsername === usernameParam ? (
         <ActionButtons>
-          <button type="button" onClick={editMyself}>
+          <button type="button" onClick={handleEditMyself}>
             Editar <FiEdit />
           </button>
           <button type="button">
