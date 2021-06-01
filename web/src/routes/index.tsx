@@ -4,6 +4,7 @@ import User from '../pages/User'
 import SingIn from '../pages/SingIn'
 import Route from './Route'
 import useSetAuth from '../hooks/useSetAuth'
+import EditUserProfile from '../pages/EditUser'
 
 function Routes() {
   useSetAuth()
@@ -12,6 +13,9 @@ function Routes() {
     <Switch>
       <Route path="/sing-in">
         <SingIn />
+      </Route>
+      <Route path="/edit/profile">
+        <EditUserProfile />
       </Route>
       <Route path="/:username">
         <User />
