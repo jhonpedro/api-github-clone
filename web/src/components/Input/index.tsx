@@ -1,4 +1,10 @@
-import React, { FocusEvent, InputHTMLAttributes, useRef, useState } from 'react'
+import React, {
+  FocusEvent,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { InputContainer, InputPlaceholder, InputElement } from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -18,6 +24,12 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [isUp, setIsUp] = useState(!!value)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (value && !isUp) {
+      setIsUp(true)
+    }
+  }, [value])
 
   function handleBlur(event: FocusEvent<HTMLInputElement>) {
     if (event.target.value === '') {
@@ -39,6 +51,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <InputContainer>
+      {showError && <span>{errorMessage}</span>}
       <InputPlaceholder isUp={isUp} onClick={handleClickRedirectToInput}>
         {placeholder}
       </InputPlaceholder>
