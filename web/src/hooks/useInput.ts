@@ -1,14 +1,17 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 const useInput = (initialValue = '', validation: any) => {
   const [value, setValue] = useState(initialValue)
   const [touched, setTouched] = useState(false)
 
-  const isValid = validation(value)
+  const isValid = useCallback(validation(value), [])
 
-  const wasTouchedAndIsInvalid = touched && !isValid
+  const wasTouchedAndIsInvalid = useMemo(
+    () => touched && !isValid,
+    [touched, isValid]
+  )
 
-  const onBlur = () => setTouched(true)
+  const onBlur = useCallback(() => setTouched(true), [])
 
   return [value, setValue, isValid, wasTouchedAndIsInvalid, onBlur]
 }
