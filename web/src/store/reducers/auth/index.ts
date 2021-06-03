@@ -33,8 +33,8 @@ export default function AuthReducer(
     case SET_USER_AND_TOKEN: {
       const newState = {
         ...state,
-        username: action.username,
-        token: action.token,
+        username: action.payload.username,
+        token: action.payload.token,
       }
 
       return newState
