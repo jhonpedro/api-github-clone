@@ -4,7 +4,7 @@ const useInput = (initialValue = '', validation: any) => {
   const [value, setValue] = useState(initialValue)
   const [touched, setTouched] = useState(false)
 
-  const isValid = useCallback(validation(value), [])
+  const isValid = useCallback(validation(value), [value])
 
   const wasTouchedAndIsInvalid = useMemo(
     () => touched && !isValid,
