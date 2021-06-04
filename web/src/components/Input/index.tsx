@@ -6,7 +6,12 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { InputContainer, InputPlaceholder, InputElement } from './styles'
+import {
+  InputContainer,
+  InputPlaceholder,
+  InputElement,
+  ErrorMessage,
+} from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage: string
@@ -57,8 +62,7 @@ const Input: React.FC<InputProps> = React.memo(
     }, [])
 
     return (
-      <InputContainer>
-        {showError && <span>{errorMessage}</span>}
+      <InputContainer showErrorBorder={showError}>
         <InputPlaceholder isUp={isUp} onClick={handleClickRedirectToInput}>
           {placeholder}
         </InputPlaceholder>
@@ -70,6 +74,7 @@ const Input: React.FC<InputProps> = React.memo(
           ref={inputRef}
           {...rest}
         />
+        {showError && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </InputContainer>
     )
   }
